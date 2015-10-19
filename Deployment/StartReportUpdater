@@ -1,0 +1,209 @@
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# SETUP UTILITY START Report Updater created by AbhiS #
+#                                                     #
+# Version      description                            #
+#   1.0.0      created by Abhi S on 15 Oct 2015       #
+#                                                     #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+export xfcolor=black
+export xbcolor=white
+export delay=4
+execno=7
+KILKARI_AGGREGATE_SRC_PATH=$PWD/Report/KilkariAggregate/
+KILKARI_INDIVIDUAL_SRC_PATH=$PWD/Report/KilkariIndividual
+MA_SRC_PATH=$PWD/Report/MA
+MK_SRC_PATH=$PWD/Report/MK
+MAMKCOMMON_SRC_PATH=$PWD/Report/MAMKCommon
+KILKARI_AGGREGATE_DEST_PATH="/home/Kilkari/Aggregated Reports/"
+KILKARI_INDIVIDUAL_DEST_PATH="/home/Kilkari/Individual Reports/"
+MA_DEST_PATH="/home/FLW services/MA Reports/"
+MK_DEST_PATH="/home/FLW services/MK Reports/"
+MAMKCOMMON_DEST_PATH="/home/FLW services/MA & MK Common Reports/"
+PEHTAHO_UPDATE_ROOT_PATH=/usr/local/tomcat/
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# executable/exe/process paths                        #
+#                                                     #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+function initial_set ()
+{
+   mkdir -p $KILKARI_AGGREGATE_SRC_PATH $KILKARI_INDIVIDUAL_SRC_PATH $MA_SRC_PATH $MK_SRC_PATH $MAMKCOMMON_SRC_PATH
+    order=1
+   exec_NM[$order]="Kilkari Aggregate";
+   path[$order]="Kilkari Aggregate";
+
+     order=2
+   exec_NM[$order]="Kilkari Individual";
+   path[$order]="Kilkari Individual";
+
+     order=3
+   exec_NM[$order]="MA Reports";
+   path[$order]="MA Reports";
+
+     order=4
+   exec_NM[$order]="Mk Reports";
+   path[$order]="Mk Reports";
+
+
+     order=5
+   exec_NM[$order]="MA & Mk Common Reports";
+   path[$order]="MA & MK Common Reports";
+   
+     order=6
+   exec_NM[$order]="All Reports";
+   path[$order]="All Reports";
+
+export execno; export exec_NM; export xx=1;
+
+}
+
+
+
+function importReports ()
+{
+
+cd  $PEHTAHO_UPDATE_ROOT_PATH
+
+for i in $1/*.prpt 
+do
+
+ sh import-export.sh --import --url=http://localhost:8080/pentaho --username=admin --password=password --source=file-system --type=files --charset=UTF-8 --path="$2" --file-path=$i --overwrite=true --permission=true --retainOwnership=true >/dev/null 2>&1
+
+done
+
+
+}
+
+
+                export path
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# SETUP code                                          #
+#                                                     #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+        clear
+initial_set
+echo -e ""
+echo -e "\tNMS Report Update Utility 1.0.1 ...\n"
+echo -e "\tCopy Reports in corresponding location and...\n"
+echo -e "\tenter  operation  you want to execute"
+        xx=1
+        while [ $xx -lt $execno ]
+        do
+			echo -e -n "\n\t\t $xx. "
+
+	                echo -e -n "${exec_NM[$xx]}\t"
+                xx=$(($xx + 1));
+		if [ $xx -eq $execno ]
+		then
+					echo -n ""
+		else
+                        echo -e -n "$xx. "
+
+                        echo -e -n "${exec_NM[$xx]}"
+		fi
+                xx=$(($xx + 1));
+        done
+echo ""
+echo -e "\t\t99. Exit\n"
+
+echo -e -n "\tenter your choice : "
+read choice
+
+#while [ $choice -lt 99 ]
+if [ $choice -eq 99 ]
+then
+        exit
+fi
+while [ 1 ]
+do
+                if [ $choice -eq 1 ]
+                then
+			echo -e "\t Kilkari Aggregate Reports update ongoing"
+			importReports $KILKARI_AGGREGATE_SRC_PATH "\"$KILKARI_AGGREGATE_DEST_PATH\""
+                        sleep $delay
+                        fi
+
+                if [ $choice -eq 2 ]
+                then
+			echo -e "\t Kilkari Individual Reports update ongoing"
+			importReports $KILKARI_INDIVIDUAL_SRC_PATH "\"$KILKARI_INDIVIDUAL_DEST_PATH\""
+                        sleep $delay
+                        fi
+
+                if [ $choice -eq 3 ]
+                then
+			echo -e "\t MA Reports update ongoing"
+			importReports $MA_SRC_PATH "\"$MA_DEST_PATH\""
+                        sleep $delay
+                        fi
+
+                if [ $choice -eq 4 ]
+                then
+			echo -e "\t MK Reports update ongoing"
+			importReports $MK_SRC_PATH "\"$MK_DEST_PATH\""
+                        sleep $delay
+                        fi
+
+                if [ $choice -eq 5 ]
+                then
+			echo -e "\t MA & MK Common Reports update ongoing"
+			importReports $MAMKCOMMON_SRC_PATH "\"$MAMKCOMMON_DEST_PATH\""
+                        sleep $delay
+                        fi
+						
+						 if [ $choice -eq 6 ]
+                then
+			echo -e "\t All Reports update ongoing"
+			importReports $KILKARI_AGGREGATE_SRC_PATH "\"$KILKARI_AGGREGATE_DEST_PATH\""
+			importReports $KILKARI_INDIVIDUAL_SRC_PATH "\"$KILKARI_INDIVIDUAL_DEST_PATH\""
+			importReports $MA_SRC_PATH "\"$MA_DEST_PATH\""
+			importReports $MK_SRC_PATH "\"$MK_DEST_PATH\""
+			importReports $MAMKCOMMON_SRC_PATH "\"$MAMKCOMMON_DEST_PATH\""
+                        sleep $delay
+                        fi
+
+                clear
+echo -e ""
+echo -e "\tNMS Report Update Utility 1.0.1 ...\n"
+echo -e "\tCopy Reports in corresponding location and...\n"
+echo -e "\tenter  operation  you want to execute"
+        xx=1
+        while [ $xx -lt $execno ]
+        do
+                        echo -e -n "\n\t\t $xx. "
+
+                        echo -e -n "${exec_NM[$xx]}\t"
+                xx=$(($xx + 1));
+                if [ $xx -eq $execno ]
+                then
+                                        echo -n ""
+                else
+                        echo -e -n "$xx. "
+
+                        echo -e -n "${exec_NM[$xx]}"
+                fi
+                xx=$(($xx + 1));
+        done
+echo ""
+echo -e "\t\t99. Exit\n"
+
+echo -e -n "\tenter your choice : "
+read choice
+if [ $choice -eq 99 ]
+then
+        exit
+fi
+
+done
+                clear
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# FILE END                                            #
+#                                                     #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
