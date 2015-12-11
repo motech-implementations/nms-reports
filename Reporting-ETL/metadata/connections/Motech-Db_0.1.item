@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TalendMetadata="http://www.talend.org/metadata/connection/2010" xmlns:orgomg.cwm.resource.relational="http:///orgomg/cwm/resource/relational.ecore">
-  <TalendMetadata:DatabaseConnection xmi:id="_sVlxcB2gEeWZI_ICf0Aw5Q" name="Motech-Db" id="_kngrcB2gEeWZI_ICf0Aw5Q" label="Motech-Db" dataPackage="_S9z6YHe0EeWVKud6zQA6cg" contextName="IT" DatabaseType="MySQL" DriverJarPath="" DriverClass="org.gjt.mm.mysql.Driver" URL="jdbc:mysql://localhost:3306/motech_data_services?noDatetimeStringSync=true" dbVersionString="MYSQL_5" Port="3306" Username="root" Password="1QY6ZyNqCD4BAhKeqSkILQ==" ServerName="localhost" DatasourceName="" FileFieldName="" SID="motech_data_services" SqlSynthax="SQL Syntax" DbmsId="mysql_id" ProductId="MYSQL" DBRootPath="" AdditionalParams="noDatetimeStringSync=true" StandardSQL="true" SQLMode="false" UiSchema="">
+  <TalendMetadata:DatabaseConnection xmi:id="_sVlxcB2gEeWZI_ICf0Aw5Q" name="Motech-Db" id="_kngrcB2gEeWZI_ICf0Aw5Q" label="Motech-Db" dataPackage="_pPA8gHe9EeWVKud6zQA6cg" ContextMode="true" ContextId="_eqcccHe7EeWVKud6zQA6cg" contextName="Default" DatabaseType="MySQL" DriverJarPath="" DriverClass="org.gjt.mm.mysql.Driver" URL="jdbc:mysql://localhost:3306/motech_data_services?noDatetimeStringSync=true" dbVersionString="MYSQL_5" Port="context.motech_port" Username="context.motech_login" Password="context.motech_password" ServerName="context.motech_server" DatasourceName="" FileFieldName="" SID="context.motech_database" SqlSynthax="SQL Syntax" DbmsId="mysql_id" ProductId="MYSQL" DBRootPath="" AdditionalParams="context.motech_additionalParams" StandardSQL="true" SQLMode="false" UiSchema="">
     <taggedValue xmi:id="_sVpb0B2gEeWZI_ICf0Aw5Q" tag="Is Conn Need Reload" value="true"/>
     <taggedValue xmi:id="_sWphYB2gEeWZI_ICf0Aw5Q" tag="package filter" value=""/>
     <taggedValue xmi:id="_sXZvUB2gEeWZI_ICf0Aw5Q" tag="Status" value=""/>
@@ -12,7 +12,7 @@
     <taggedValue xmi:id="_sXsDMB2gEeWZI_ICf0Aw5Q" tag="DB ProductName" value="MySQL"/>
     <taggedValue xmi:id="_sXsDMR2gEeWZI_ICf0Aw5Q" tag="DB ProductVersion" value="5.5.40-0ubuntu0.14.04.1"/>
     <taggedValue xmi:id="_sXsDMh2gEeWZI_ICf0Aw5Q" tag="DB IdentifierQuoteString" value="`"/>
-    <parameters xmi:id="_sVpb0R2gEeWZI_ICf0Aw5Q" key="CONN_PARA_KEY_USERNAME" value="root"/>
+    <parameters xmi:id="_sVpb0R2gEeWZI_ICf0Aw5Q" key="CONN_PARA_KEY_USERNAME" value="context.Motech_Db_Login"/>
   </TalendMetadata:DatabaseConnection>
-  <orgomg.cwm.resource.relational:Catalog xmi:id="_S9z6YHe0EeWVKud6zQA6cg" name="motech_data_services" dataManager="_sVlxcB2gEeWZI_ICf0Aw5Q"/>
+  <orgomg.cwm.resource.relational:Catalog xmi:id="_pPA8gHe9EeWVKud6zQA6cg" name="motech_data_services" dataManager="_sVlxcB2gEeWZI_ICf0Aw5Q"/>
 </xmi:XMI>

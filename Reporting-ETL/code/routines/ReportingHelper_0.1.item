@@ -41,6 +41,7 @@ public class ReportingHelper {
      */
     public static Long getOperator(String operatorCode,
             Connection reportDBConn, Map<String, Object> globalMap) {
+
         Map<String, Long> operatorMap = null;
         if (globalMap.containsKey("operatorMap")) {
             operatorMap = (Map) globalMap.get("operatorMap");
@@ -67,12 +68,10 @@ public class ReportingHelper {
                 // Insert record
                 stmt2 = reportDBConn
                         .prepareStatement(
-                                "INSERT INTO operator_dimension(Operator,operator_code, DW_LastUpdatedDtim) VALUES(?, ?, ?)",
+                                "INSERT INTO operator_dimension(Operator,operator_code) VALUES(?, ?)",
                                 Statement.RETURN_GENERATED_KEYS);
                 stmt2.setString(1, operatorCode);
                 stmt2.setString(2, operatorCode);
-                stmt2.setTimestamp(3, new java.sql.Timestamp(Calendar
-                        .getInstance().getTimeInMillis()));
                 stmt2.executeUpdate();
                 rs2 = stmt2.getGeneratedKeys();
                 if (rs2.next()) {
@@ -1075,7 +1074,7 @@ public class ReportingHelper {
 
     public static boolean setCourseStatus(Long flwId, String contentName,
             java.util.Date startTime, java.util.Date endTime,
-            Boolean completionFlag, String fileName,
+            Boolean correctAnswerEntered, String fileName,
             Connection reportDBConn) {
         PreparedStatement stmt1 = null;
         ResultSet rs1 = null;
@@ -1084,7 +1083,7 @@ public class ReportingHelper {
             if ("Chapter01_Lesson01".equals(contentName)
                     && "ch1_l1.wav".equals(fileName)) {
             stmt1 = reportDBConn
-                        .prepareStatement("SELECT id, end_time FROM ma_course_status WHERE flw_id =? ORDER BY id desc LIMIT 1");
+                        .prepareStatement("SELECT id, complete_time FROM ma_course_status WHERE flw_id =? ORDER BY id desc LIMIT 1");
             stmt1.setLong(1, flwId);
             rs1 = stmt1.executeQuery();
             if (rs1 != null && rs1.next()) {
@@ -1118,7 +1117,8 @@ public class ReportingHelper {
             }
 
             } else if ("Chapter11_Question04".equals(contentName)
-                    && completionFlag && "ch11_q4.wav".equals(fileName)) {
+                    && correctAnswerEntered != null
+                    && "ch11_q4.wav".equals(fileName)) {
                 stmt1 = reportDBConn
             .prepareStatement("SELECT MAX(id) FROM ma_course_status WHERE flw_id =?");
                 stmt1.setLong(1, flwId);
@@ -1171,7 +1171,7 @@ public class ReportingHelper {
                     + "_Question%%' ");
             sqlQuery.append(" AND md.file_name like '" + contentFile
                     + "_q%%.wav' ");
-            sqlQuery.append(" AND cc.completion_flag=1 AND cd.flw_id =?");
+            sqlQuery.append(" AND cc.correct_answer_entered IS NOT NULL AND cd.flw_id =?");
             sqlQuery.append(" order by cc.start_time DESC) gp GROUP BY gp.content_name) main GROUP BY main.flw_id");
             stmt = reportDBConn
                     .prepareStatement(sqlQuery.toString());
