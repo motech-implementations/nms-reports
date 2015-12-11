@@ -1,4 +1,3 @@
-
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # SETUP UTILITY START Report Updater created by AbhiS #
 #                                                     #
@@ -10,7 +9,7 @@
 export xfcolor=black
 export xbcolor=white
 export delay=4
-execno=7
+execno=9
 KILKARI_AGGREGATE_SRC_PATH=$PWD/Report/KilkariAggregate/
 KILKARI_INDIVIDUAL_SRC_PATH=$PWD/Report/KilkariIndividual
 MA_SRC_PATH=$PWD/Report/MA
@@ -18,10 +17,11 @@ MK_SRC_PATH=$PWD/Report/MK
 MAMKCOMMON_SRC_PATH=$PWD/Report/MAMKCommon
 KILKARI_AGGREGATE_DEST_PATH="/home/Kilkari/Aggregated Reports/"
 KILKARI_INDIVIDUAL_DEST_PATH="/home/Kilkari/Individual Reports/"
-MA_DEST_PATH="/home/FLW services/MA Reports/"
-MK_DEST_PATH="/home/FLW services/MK Reports/"
-MAMKCOMMON_DEST_PATH="/home/FLW services/MA & MK Common Reports/"
-PEHTAHO_UPDATE_ROOT_PATH=/usr/local/tomcat/
+MA_DEST_PATH="/home/FLW Services/MA Reports/"
+MK_DEST_PATH="/home/FLW Services/MK Reports/"
+MAMKCOMMON_DEST_PATH="/home/FLW Services/MA & MK Common Reports/"
+ZIP_DEST_PATH="/home"
+PEHTAHO_UPDATE_ROOT_PATH=/home/grameen/biserver-ce
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # executable/exe/process paths                        #
 #                                                     #
@@ -55,24 +55,51 @@ function initial_set ()
    exec_NM[$order]="All Reports";
    path[$order]="All Reports";
 
+     order=7
+   exec_NM[$order]="Upload Kilkari Reports via zip file";
+   path[$order]="Upload Kilkari via zip file";
+  
+   order=8
+   exec_NM[$order]="Upload Flw Services via zip file";
+   path[$order]="Upload Flw Services via zip file";
+
+
 export execno; export exec_NM; export xx=1;
 
 }
 
 
+function importReportsZip ()
+{
+
+cd  $PEHTAHO_UPDATE_ROOT_PATH
+
+if [ $2 -eq 100 ]
+	then
+	 sh import-export.sh --import --url=http://localhost:8080/pentaho --username=admin --password=password --charset=UTF-8 --path="$ZIP_DEST_PATH" --file-path="$1/Kilkari.zip" --overwrite=true --permission=true --retainOwnership=true >/dev/null 2>&1 
+
+elif [ $2 -eq 200 ]
+        then
+	sh import-export.sh --import --url=http://localhost:8080/pentaho --username=admin --password=password --charset=UTF-8 --path="$ZIP_DEST_PATH" --file-path="$1/FLW Services.zip" --overwrite=true --permission=true --retainOwnership=true >/dev/null 2>&1
+
+else
+	echo "Wrong Option"
+fi
+
+}
 
 function importReports ()
 {
 
 cd  $PEHTAHO_UPDATE_ROOT_PATH
 
-for i in $1/*.prpt 
-do
 
- sh import-export.sh --import --url=http://localhost:8080/pentaho --username=admin --password=password --source=file-system --type=files --charset=UTF-8 --path="$2" --file-path=$i --overwrite=true --permission=true --retainOwnership=true >/dev/null 2>&1
+	for i in $1/*.prpt 
+	do
 
-done
+	 sh import-export.sh --import --url=http://localhost:8080/pentaho --username=admin --password=password --charset=UTF-8 --path="$2" --file-path="$i" --overwrite=true --permission=true --retainOwnership=true  >/dev/null 2>&1 
 
+	done
 
 }
 
@@ -124,7 +151,7 @@ do
                 then
 			echo -e "\t Kilkari Aggregate Reports update ongoing"
 			importReports $KILKARI_AGGREGATE_SRC_PATH "\"$KILKARI_AGGREGATE_DEST_PATH\""
-                        sleep $delay
+                        #sleep $delay
                         fi
 
                 if [ $choice -eq 2 ]
@@ -155,7 +182,7 @@ do
                         sleep $delay
                         fi
 						
-						 if [ $choice -eq 6 ]
+		if [ $choice -eq 6 ]
                 then
 			echo -e "\t All Reports update ongoing"
 			importReports $KILKARI_AGGREGATE_SRC_PATH "\"$KILKARI_AGGREGATE_DEST_PATH\""
@@ -166,7 +193,24 @@ do
                         sleep $delay
                         fi
 
-                clear
+                if [ $choice -eq 7 ]
+                then
+			echo -e "\t Upload Kilkari reports via zip file"
+			echo -e "\t Please enter zip path"
+		        read zipPath	
+			importReportsZip $zipPath 100
+                        sleep $delay
+                        fi
+
+		if [ $choice -eq 8 ]
+		then
+			echo -e "\t Upload Flw Service reports via zip file"
+			echo -e "\t Please enter zip path"
+			read zipPath
+			importReportsZip $zipPath 200
+			sleep $delay
+			fi
+                #clear
 echo -e ""
 echo -e "\tNMS Report Update Utility 1.0.1 ...\n"
 echo -e "\tCopy Reports in corresponding location and...\n"
@@ -199,7 +243,7 @@ then
 fi
 
 done
-                clear
+                #clear
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # FILE END                                            #
