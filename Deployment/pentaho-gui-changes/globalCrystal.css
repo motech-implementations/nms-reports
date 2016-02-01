@@ -5521,9 +5521,10 @@ treecontrol.tree-classic li .tree-selected {
 }
 
 div#animate-wrapper:after {
-    content: "Forgot password? Write an email to xxxx@xxxxxxx.com";
-	color: #777; 
-	font-size: 13px;
+    /*content: "Forgot password? Write an email to xxxx@xxxxxxx.com";*/
+    content: "Forgot password? Please contact your respective administrator.";
+    color: #777; 
+    font-size: 13px;
 } 
 
 #userRolesAdminPanel > table > tbody > tr:nth-child(3) > td > table > tbody > tr:nth-child(1) > td > div > div:nth-child(3) {
