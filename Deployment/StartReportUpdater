@@ -1,0 +1,293 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# SETUP UTILITY START Report Updater created by NitinJ#
+#                                                     #
+# Version      description                            #
+#   1.0.0      created by Abhi S on 15 Oct 2015       #
+#   2.0.0      created by Nitin J on 25 Jan 2016      #
+#                                                     #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+export xfcolor=black
+export xbcolor=white
+export delay=4
+execno=8
+
+KILKARI_AGGREGATE_SRC_PATH="Kilkari/Aggregated Reports/"
+KILKARI_INDIVIDUAL_SRC_PATH="Kilkari/Individual Reports/"
+MA_SRC_PATH="FLW Services/MA Reports/"
+MK_SRC_PATH="FLW Services/MK Reports/"
+MAMKCOMMON_SRC_PATH="FLW Services/MA MK Common Reports/"
+
+KILKARI_AGGREGATE_DEST_PATH="/home/Kilkari/Aggregated Reports/"
+KILKARI_INDIVIDUAL_DEST_PATH="/home/Kilkari/Individual Reports/"
+MA_DEST_PATH="/home/FLW Services/MA Reports/"
+MK_DEST_PATH="/home/FLW Services/MK Reports/"
+MAMKCOMMON_DEST_PATH="/home/FLW Services/MA MK Common Reports/"
+ZIP_DEST_PATH="/home/"
+PEHTAHO_UPDATE_ROOT_PATH=$(echo $CATALINA_HOME)
+
+#PEHTAHO_UPDATE_ROOT_PATH=/home/grameen/biserver-ce
+#PEHTAHO_UPDATE_ROOT_PATH_PROD=/usr/local/biserver-ce
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# executable/exe/process paths                        #
+#                                                     #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+function initial_set ()
+{   
+    order=1
+   exec_NM[$order]="Kilkari Aggregate";
+   path[$order]="Kilkari Aggregate";
+
+     order=2
+   exec_NM[$order]="Kilkari Individual";
+   path[$order]="Kilkari Individual";
+
+     order=3
+   exec_NM[$order]="MA Reports";
+   path[$order]="MA Reports";
+
+     order=4
+   exec_NM[$order]="Mk Reports";
+   path[$order]="Mk Reports";
+
+
+     order=5
+   exec_NM[$order]="MA MK Common Reports";
+   path[$order]="MA MK Common Reports"; 
+
+     order=6
+   exec_NM[$order]="Upload Kilkari Reports via zip file";
+   path[$order]="Upload Kilkari via zip file";
+  
+   order=7
+   exec_NM[$order]="Upload Flw Services via zip file";
+   path[$order]="Upload Flw Services via zip file";
+
+
+export execno; export exec_NM; export xx=1;
+
+}
+
+
+function importReportsZip ()
+{
+    echo -e "\t---Please enter the input--- "
+    BI_SERVER=http://localhost:8080/pentaho
+    echo -n ".zip file path: "
+    read zipPath	
+    echo
+    echo -n "Admin level User name or Admin: " 
+    read USER    
+    echo
+    echo -n "Password:"
+    read -s PASSWORD
+    echo 
+
+    cd $PEHTAHO_UPDATE_ROOT_PATH
+    cd ../
+
+if [ $1 -eq 100 ]
+	then
+	 echo "Exporting Started for" $zipPath"/Kilkari.zip"
+	 sh import-export.sh --import --url=$BI_SERVER --username=$USER --password=$PASSWORD --charset=UTF-8 --path="$ZIP_DEST_PATH" --file-path="$zipPath/Kilkari.zip" --overwrite=true --permission=true --retainOwnership=true >/dev/null 2>&1 
+
+elif [ $1 -eq 200 ]
+        then
+	 echo "Exporting Started for" $zipPath"/FLW Services.zip"
+	 sh import-export.sh --import --url=$BI_SERVER --username=$USER --password=$PASSWORD --charset=UTF-8 --path="$ZIP_DEST_PATH" --file-path="$zipPath/FLW Services.zip" --overwrite=true --permission=true --retainOwnership=true >/dev/null 2>&1
+
+else
+	 echo "Wrong Option"
+fi
+}
+
+function importReports ()
+{
+
+    echo -e "\t---Please enter the input--- "
+
+    BI_SERVER=http://localhost:8080/pentaho
+        
+    echo -n "Directory Path where Kilkari/FLW Services folder has been kept(Please do not include Kilkari/FLW Service name in the path): "
+    read filepath
+    echo
+    echo -n "1 for Single prpt file import , 2 for ALL files in selected option : "
+    read fileoption
+    echo  
+    echo -n "Admin level User name or Admin:" 
+    read USER    
+    echo
+    echo -n "Password:"
+    read -s PASSWORD
+    echo 
+    echo
+
+    cd $PEHTAHO_UPDATE_ROOT_PATH
+    cd ../
+
+    if [ $fileoption -eq 1 ]
+      then
+	    while [ 1 -lt 2 ] 
+	    do
+          echo -n "File Name: "
+          read filename
+            
+          i=$filepath/$2/$filename
+          echo "Start importing" $i "file" 
+          
+       	  sh import-export.sh --import --url=$BI_SERVER --username=$USER --password=$PASSWORD --charset=UTF-8 --path="$1" --file-path="$i" --overwrite=true --permission=true --retainOwnership=true >/dev/null 2>&1
+       	   
+          echo -n "Do you want to import another file in same folder ..Y/N: "
+          read next
+          if [ ${next^^} != "Y" ] 
+           then
+             break
+          fi
+      done
+
+    elif [ $fileoption -eq 2 ]
+      then       
+         j=$filepath/$2
+	       for f in "$j"/*.prpt
+	       do
+            echo "Importing "$f
+            sh import-export.sh --import --url=$BI_SERVER --username=$USER --password=$PASSWORD --charset=UTF-8 --path="$1" --file-path="$f" --overwrite=true --permission=true --retainOwnership=true >/dev/null 2>&1
+	       done
+    else
+         echo -e "\t Wrong option entered"
+         return
+    fi
+}
+
+
+                export path
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# SETUP code                                          #
+#                                                     #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+        clear
+initial_set
+echo -e ""
+echo -e "\tNMS Report Update Utility 1.0.1 ...\n"
+echo -e "\tCopy Reports in corresponding location and...\n"
+echo -e "\tenter  operation  you want to execute"
+        xx=1
+        while [ $xx -lt $execno ]
+        do
+			echo -e -n "\n\t\t $xx. "
+
+	                echo -e -n "${exec_NM[$xx]}\t"
+                xx=$(($xx + 1));
+		if [ $xx -eq $execno ]
+		then
+					echo -n ""
+		else
+                        echo -e -n "$xx. "
+
+                        echo -e -n "${exec_NM[$xx]}"
+		fi
+                xx=$(($xx + 1));
+        done
+echo ""
+echo -e "\t\t99. Exit\n"
+
+echo -e -n "\tenter your choice : "
+read choice
+
+#while [ $choice -lt 99 ]
+if [ $choice -eq 99 ]
+then
+        exit
+fi
+while [ 1 ]
+do
+                if [ $choice -eq 1 ]
+                then
+			echo -e "\t Kilkari Aggregate Reports update ongoing"
+			importReports "\"$KILKARI_AGGREGATE_DEST_PATH\"" "$KILKARI_AGGREGATE_SRC_PATH"
+                        sleep $delay
+                        fi
+
+                if [ $choice -eq 2 ]
+                then
+			echo -e "\t Kilkari Individual Reports update ongoing"
+			importReports "\"$KILKARI_INDIVIDUAL_DEST_PATH\"" "$KILKARI_INDIVIDUAL_SRC_PATH"
+                        sleep $delay
+                        fi
+
+                if [ $choice -eq 3 ]
+                then
+			echo -e "\t MA Reports update ongoing"
+			importReports "\"$MA_DEST_PATH\"" "$MA_SRC_PATH"
+                        sleep $delay
+                        fi
+
+                if [ $choice -eq 4 ]
+                then
+			echo -e "\t MK Reports update ongoing"
+			importReports "\"$MK_DEST_PATH\"" "$MK_SRC_PATH"
+                        sleep $delay
+                        fi
+
+                if [ $choice -eq 5 ]
+                then
+			echo -e "\t MA & MK Common Reports update ongoing"
+			importReports "\"$MAMKCOMMON_DEST_PATH\"" "$MAMKCOMMON_SRC_PATH"
+                        sleep $delay
+                        fi						
+
+                if [ $choice -eq 6 ]
+                then
+			echo -e "\t Upload Kilkari reports via zip file" 
+			importReportsZip 100
+                        sleep $delay
+                        fi
+
+		if [ $choice -eq 7 ]
+		then
+			echo -e "\t Upload Flw Service reports via zip file"
+			importReportsZip 200
+			sleep $delay
+			fi
+                #clear
+echo -e ""
+echo -e "\tNMS Report Update Utility 1.0.1 ...\n"
+echo -e "\tCopy Reports in corresponding location and...\n"
+echo -e "\tenter  operation  you want to execute"
+        xx=1
+        while [ $xx -lt $execno ]
+        do
+                        echo -e -n "\n\t\t $xx. "
+
+                        echo -e -n "${exec_NM[$xx]}\t"
+                xx=$(($xx + 1));
+                if [ $xx -eq $execno ]
+                then
+                                        echo -n ""
+                else
+                        echo -e -n "$xx. "
+
+                        echo -e -n "${exec_NM[$xx]}"
+                fi
+                xx=$(($xx + 1));
+        done
+echo ""
+echo -e "\t\t99. Exit\n"
+
+echo -e -n "\tenter your choice : "
+read choice
+if [ $choice -eq 99 ]
+then
+        exit
+fi
+
+done
+                #clear
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# FILE END                                            #
+#                                                     #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # #
