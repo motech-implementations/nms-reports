@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ContextType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" confirmationNeeded="false" name="Default">
-  <contextParameter comment="" name="report_server" prompt="report_server?" promptNeeded="false" type="id_String" value="null"/>
-  <contextParameter comment="" name="report_password" prompt="report_password?" promptNeeded="false" type="id_Password" value="RRyLGfljUdg="/>
-  <contextParameter comment="" name="report_AdditionalParams" prompt="report_AdditionalParams?" promptNeeded="false" type="id_String" value="null"/>
-  <contextParameter comment="" name="report_login" prompt="report_login?" promptNeeded="false" type="id_String" value="null"/>
-  <contextParameter comment="" name="report_database" prompt="report_database?" promptNeeded="false" type="id_String" value="null"/>
-  <contextParameter comment="" name="report_port" prompt="report_port?" promptNeeded="false" type="id_String" value="null"/>
-</talendfile:ContextType>
