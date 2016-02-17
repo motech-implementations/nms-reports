@@ -14,15 +14,15 @@ execno=8
 
 KILKARI_AGGREGATE_SRC_PATH="Kilkari/Aggregated Reports/"
 KILKARI_INDIVIDUAL_SRC_PATH="Kilkari/Individual Reports/"
-MA_SRC_PATH="FLW Services/MA Reports/"
-MK_SRC_PATH="FLW Services/MK Reports/"
-MAMKCOMMON_SRC_PATH="FLW Services/MA MK Common Reports/"
+MA_SRC_PATH="Asha Services/MA Reports/"
+MK_SRC_PATH="Asha Services/MK Reports/"
+MAMKCOMMON_SRC_PATH="Asha Services/FLW Reports/"
 
 KILKARI_AGGREGATE_DEST_PATH="/home/Kilkari/Aggregated Reports/"
 KILKARI_INDIVIDUAL_DEST_PATH="/home/Kilkari/Individual Reports/"
-MA_DEST_PATH="/home/FLW Services/MA Reports/"
-MK_DEST_PATH="/home/FLW Services/MK Reports/"
-MAMKCOMMON_DEST_PATH="/home/FLW Services/MA MK Common Reports/"
+MA_DEST_PATH="/home/Asha Services/MA Reports/"
+MK_DEST_PATH="/home/Asha Services/MK Reports/"
+MAMKCOMMON_DEST_PATH="/home/Asha Services/FLW Reports/"
 ZIP_DEST_PATH="/home/"
 PEHTAHO_UPDATE_ROOT_PATH=$(echo $CATALINA_HOME)
 
@@ -53,16 +53,16 @@ function initial_set ()
 
 
      order=5
-   exec_NM[$order]="MA MK Common Reports";
-   path[$order]="MA MK Common Reports"; 
+   exec_NM[$order]="FLW Reports";
+   path[$order]="FLW Reports"; 
 
      order=6
    exec_NM[$order]="Upload Kilkari Reports via zip file";
    path[$order]="Upload Kilkari via zip file";
   
    order=7
-   exec_NM[$order]="Upload Flw Services via zip file";
-   path[$order]="Upload Flw Services via zip file";
+   exec_NM[$order]="Upload Asha Services via zip file";
+   path[$order]="Upload Asha Services via zip file";
 
 
 export execno; export exec_NM; export xx=1;
@@ -94,8 +94,8 @@ if [ $1 -eq 100 ]
 
 elif [ $1 -eq 200 ]
         then
-	 echo "Exporting Started for" $zipPath"/FLW Services.zip"
-	 sh import-export.sh --import --url=$BI_SERVER --username=$USER --password=$PASSWORD --charset=UTF-8 --path="$ZIP_DEST_PATH" --file-path="$zipPath/FLW Services.zip" --overwrite=true --permission=true --retainOwnership=true >/dev/null 2>&1
+	 echo "Exporting Started for" $zipPath"/Asha Services.zip"
+	 sh import-export.sh --import --url=$BI_SERVER --username=$USER --password=$PASSWORD --charset=UTF-8 --path="$ZIP_DEST_PATH" --file-path="$zipPath/Asha Services.zip" --overwrite=true --permission=true --retainOwnership=true >/dev/null 2>&1
 
 else
 	 echo "Wrong Option"
@@ -109,7 +109,7 @@ function importReports ()
 
     BI_SERVER=http://localhost:8080/pentaho
         
-    echo -n "Directory Path where Kilkari/FLW Services folder has been kept(Please do not include Kilkari/FLW Service name in the path): "
+    echo -n "Directory Path where Kilkari/Asha Services folder has been kept(Please do not include Kilkari/Asha Service name in the path): "
     read filepath
     echo
     echo -n "1 for Single prpt file import , 2 for ALL files in selected option : "
@@ -234,7 +234,7 @@ do
 
                 if [ $choice -eq 5 ]
                 then
-			echo -e "\t MA & MK Common Reports update ongoing"
+			echo -e "\t FLW Reports update ongoing"
 			importReports "\"$MAMKCOMMON_DEST_PATH\"" "$MAMKCOMMON_SRC_PATH"
                         sleep $delay
                         fi						
@@ -248,7 +248,7 @@ do
 
 		if [ $choice -eq 7 ]
 		then
-			echo -e "\t Upload Flw Service reports via zip file"
+			echo -e "\t Upload Asha Service reports via zip file"
 			importReportsZip 200
 			sleep $delay
 			fi
