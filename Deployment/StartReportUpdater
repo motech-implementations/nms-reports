@@ -14,15 +14,15 @@ execno=8
 
 KILKARI_AGGREGATE_SRC_PATH="Kilkari/Aggregated Reports/"
 KILKARI_INDIVIDUAL_SRC_PATH="Kilkari/Individual Reports/"
-MA_SRC_PATH="Asha Services/MA Reports/"
-MK_SRC_PATH="Asha Services/MK Reports/"
-MAMKCOMMON_SRC_PATH="Asha Services/Asha Reports/"
+MA_SRC_PATH="Mobile Academy/Individual Reports/"
+MK_SRC_PATH="Mobile Academy/MK Reports/"
+MAMKCOMMON_SRC_PATH="Mobile Academy/Aggregated Reports/"
 
 KILKARI_AGGREGATE_DEST_PATH="/home/Kilkari/Aggregated Reports/"
 KILKARI_INDIVIDUAL_DEST_PATH="/home/Kilkari/Individual Reports/"
-MA_DEST_PATH="/home/Asha Services/MA Reports/"
-MK_DEST_PATH="/home/Asha Services/MK Reports/"
-MAMKCOMMON_DEST_PATH="/home/Asha Services/Asha Reports/"
+MA_DEST_PATH="/home/Mobile Academy/Individual Reports/"
+MK_DEST_PATH="/home/Mobile Academy/MK Reports/"
+MAMKCOMMON_DEST_PATH="/home/Mobile Academy/Aggregated Reports/"
 ZIP_DEST_PATH="/home/"
 PEHTAHO_UPDATE_ROOT_PATH=$(echo $CATALINA_HOME)
 
@@ -44,8 +44,8 @@ function initial_set ()
    path[$order]="Kilkari Individual";
 
      order=3
-   exec_NM[$order]="MA Reports";
-   path[$order]="MA Reports";
+   exec_NM[$order]="MA Individual";
+   path[$order]="MA Individual";
 
      order=4
    exec_NM[$order]="Mk Reports";
@@ -53,16 +53,16 @@ function initial_set ()
 
 
      order=5
-   exec_NM[$order]="Asha Reports";
-   path[$order]="Asha Reports"; 
+   exec_NM[$order]="MA Aggregate";
+   path[$order]="MA Aggregate"; 
 
      order=6
    exec_NM[$order]="Upload Kilkari Reports via zip file";
    path[$order]="Upload Kilkari via zip file";
   
    order=7
-   exec_NM[$order]="Upload Asha Services via zip file";
-   path[$order]="Upload Asha Services via zip file";
+   exec_NM[$order]="Upload Mobile Academy via zip file";
+   path[$order]="Upload Mobile Academy via zip file";
 
 
 export execno; export exec_NM; export xx=1;
@@ -94,8 +94,8 @@ if [ $1 -eq 100 ]
 
 elif [ $1 -eq 200 ]
         then
-	 echo "Exporting Started for" $zipPath"/Asha Services.zip"
-	 sh import-export.sh --import --url=$BI_SERVER --username=$USER --password=$PASSWORD --charset=UTF-8 --path="$ZIP_DEST_PATH" --file-path="$zipPath/Asha Services.zip" --overwrite=true --permission=true --retainOwnership=true >/dev/null 2>&1
+	 echo "Exporting Started for" $zipPath"/Mobile Academy.zip"
+	 sh import-export.sh --import --url=$BI_SERVER --username=$USER --password=$PASSWORD --charset=UTF-8 --path="$ZIP_DEST_PATH" --file-path="$zipPath/Mobile Academy.zip" --overwrite=true --permission=true --retainOwnership=true >/dev/null 2>&1
 
 else
 	 echo "Wrong Option"
@@ -109,7 +109,7 @@ function importReports ()
 
     BI_SERVER=http://localhost:8080/pentaho
         
-    echo -n "Directory Path where Kilkari/Asha Services folder has been kept(Please do not include Kilkari/Asha Service name in the path): "
+    echo -n "Directory Path where Kilkari/Mobile Academy folder has been kept(Please do not include Kilkari/Mobile Academy name in the path): "
     read filepath
     echo
     echo -n "1 for Single prpt file import , 2 for ALL files in selected option : "
@@ -248,7 +248,7 @@ do
 
 		if [ $choice -eq 7 ]
 		then
-			echo -e "\t Upload Asha Service reports via zip file"
+			echo -e "\t Upload Mobile Academy reports via zip file"
 			importReportsZip 200
 			sleep $delay
 			fi
