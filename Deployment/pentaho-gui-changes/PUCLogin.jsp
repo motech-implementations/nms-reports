@@ -166,23 +166,27 @@
 %>
     <div id="login-form-container" class="lang_<%=cleanedLang%>">
       <div id="animate-wrapper">
-        <h1><%=Messages.getInstance().getString("UI.PUC.LOGIN.LOGIN")%></h1>
+        <h1 style="text-transform: uppercase;">User Login</h1>
          <form name="login" id="login" action="j_spring_security_check" method="POST">
-          <div class="row-fluid nowrap">
-            <div class="input-container">
-              <label><%=Messages.getInstance().getString("UI.PUC.LOGIN.USERNAME")%></label>
-              <input id="j_username" name="j_username" type="text" placeholder="" autocomplete="off">
-            </div>
-            <div class="input-container">
-              <label><%=Messages.getInstance().getString("UI.PUC.LOGIN.PASSWORD")%></label>
-              <input id="j_password" name="j_password" type="password" placeholder="" autocomplete="off">
-            </div>
-            <div class="input-container">
-              <label>&nbsp;</label>
-              <button type="submit" id="loginbtn" class="btn"><%=Messages.getInstance().getString("UI.PUC.LOGIN.LOGIN")%></button>
-              <input type="hidden" name="locale" value="en_US">
-            </div>
+	 <div class="username-password">
+           <div class="row-fluid nowrap">
+             <div class="input-container">
+               <label style="text-transform: uppercase;"><%=Messages.getInstance().getString("UI.PUC.LOGIN.USERNAME")%></label>
+               <input id="j_username" name="j_username" type="text" placeholder="" autocomplete="off">
+             </div>
+             <div class="input-container">
+               <label style="text-transform: uppercase;"><%=Messages.getInstance().getString("UI.PUC.LOGIN.PASSWORD")%></label>
+               <input id="j_password" name="j_password" type="password" placeholder="" autocomplete="off">
+             </div>
+         </div>
+	 <div class="login-button">
+             <div class="input-container">
+               <label>&nbsp;</label>
+               <button type="submit" id="loginbtn" class="btn" style="text-transform: uppercase;"><%=Messages.getInstance().getString("UI.PUC.LOGIN.LOGIN")%></button>
+               <input type="hidden" name="locale" value="en_US">
+             </div>
           </div>
+         </div>
           <div id="eval-users-toggle-container">
             <%
               if (showUsers) {

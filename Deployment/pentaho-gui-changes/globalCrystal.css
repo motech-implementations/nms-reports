@@ -284,7 +284,7 @@ cursor: auto;
   cursor: hand;
 }
 
-.pentaho-toggle-button button{
+.pentaho-toggle-button-container .pentaho-toggle-button button, .pentaho-toggle-button button {
   background: transparent;
   border:none;
   color: inherit;
@@ -399,10 +399,19 @@ cursor: auto;
   background: url('images/bg_btn_selected.png') repeat-x;
   background-position: center center;*/
 }
+
 div#FilterPanel div.pentaho-toggle-button-down button{
   color: #293b44;
+  background: transparent;
+  border:none;
+  color: inherit;
 }
 
+div#FilterPanel div.pentaho-toggle-button-up button{
+  background: transparent;
+  border:none;
+  color: inherit;
+}
   /* Note: By default there is no padding on the bottom as the button area supplies the necessary amount. If your dialog
   has no buttons add an addition class to your element, pentaho-dialog-buttonless, to have full padding around the contents*/
 .pentaho-dialog, .bootstrap .modal.pentaho-dialog {
@@ -2315,7 +2324,8 @@ body.IE>table {
   height: 16px;
   margin: 0;
 }
-.dialog-content .dijitComboBox .dijitArrowButton {
+.dialog-content .dijitComboBox .dijitArrowButton,
+div.dijitDateTextBox.dijitComboBox .dijitArrowButton {
   /* fallback color */
   background: #000000;
   /* Safari/Chrome */
@@ -2357,7 +2367,8 @@ body.IE>table {
   background-position: center center;
 }
 
-.dialog-content .dijitComboBox .dijitArrowButton input[type='text'] {
+.dialog-content .dijitComboBox .dijitArrowButton input[type='text'],
+div.dijitDateTextBox.dijitComboBox .dijitArrowButton input[type='text'] {
   border: none;
   height: 20px !important;
 }
@@ -3631,20 +3642,17 @@ div.prompt-panel .pentaho-toggle-button-container {
 
 /* Login page styles */
 #login-background {
-  /*background: url(images/login-crystal-bg.jpeg);
-  */
   background: url(images/NHM_Logo.png) no-repeat top center;
   height: 663px;
   width: 1255px;
-  top: 90px;
+  top: 10px;
   margin: 0 auto;
   position: relative;
 }
 #login-logo {
-  /*background: url(../images/puc-login-logo.png) no-repeat left;
-  */
+  /*background: url(../images/puc-login-logo.png) no-repeat left;*/
   width: 0;
-  height: 93px;
+  height: 237px;
   left: 750px;
   top: 90px;
   position: relative;
@@ -3667,7 +3675,7 @@ div.prompt-panel .pentaho-toggle-button-container {
 }
 #login-form-container {
   left: 585px;
-  top: 178px;
+  top: 200px;
   width: 550px;
   position: relative;
 }
@@ -3689,16 +3697,18 @@ div.prompt-panel .pentaho-toggle-button-container {
   margin-right: 20px;
   margin-left: 0px;
   width: 202px;
+  box-shadow: 3px 3px 2px #888888;
 }
 
 .nowrap {
   white-space: nowrap;
 }
 #login .input-container {
-  display: inline-block;
+  display: block;
 }
 #login .input-container button {
   margin-bottom: 10px;
+  box-shadow: 3px 3px 2px #888888;
 }
 
 #login-form-container H1 {
@@ -3726,7 +3736,7 @@ div.prompt-panel .pentaho-toggle-button-container {
   opacity: 0.5;
   /*display: block;
   */
-  display:none;
+  display: none;
   -moz-transition: width 600ms linear, opacity 1s linear;
   -webkit-transition: width 600ms linear, opacity 1s linear;
   transition: width 600ms linear, opacity 1s linear;
@@ -3743,7 +3753,6 @@ div.prompt-panel .pentaho-toggle-button-container {
   white-space: nowrap;
   cursor: pointer;
   display: inline-block;
- 
 }
 #eval-users-toggle > DIV {
   display: inline-block;
@@ -3760,9 +3769,10 @@ div.prompt-panel .pentaho-toggle-button-container {
   transition: width 600ms linear, left 600ms linear, opacity 1s linear;
 }
 #animate-wrapper.afterSlide {
-  left: 0px;
+  left: 24%;
   width: 600px;
   opacity: 1;
+  margin-left: -35%;
 }
 #login-wrapper {
   height: 790px;
@@ -4252,6 +4262,18 @@ vertical-align: middle;
   width: 22px;
   height: 22px;
   border: 1px solid transparent;
+}
+
+.textfield-icon {
+  background: url('images/prompt_controls/textfield.png') no-repeat;
+  width: 32px;
+  height: 32px;
+}
+
+.format-wrapper .textfield-icon {
+  background-position: -4px -4px;
+  width: 24px;
+  height: 24px;
 }
 #arrow-menu, .arrow-menu-icon{
   background: url('images/arrow_menu.png') no-repeat;
@@ -4772,6 +4794,8 @@ div.listbox .pentaho-listbox {
 #stepsPanel {
   border-right: 0px solid black;
   background-image: url(images/bg_steps.png);
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
 /* instaview fiel type icon? */
 .pentaho-selectlist-item-data {
@@ -5183,7 +5207,7 @@ div.listbox .pentaho-listbox {
     border: 2px solid #cbdde8;
     padding-top: 5px;
     padding-bottom: 5px;
-    width: 100%;
+    width: 97%;
 }
 
 .dijitCalendarPopup.dijitPopup .dijitCalendarContainer * {
@@ -5243,16 +5267,19 @@ div.listbox .pentaho-listbox {
     left: -2px;
 }
 
-[id*=DP] .dijitDownArrowButton {
+[id*=DP] .dijitDownArrowButton,
+div.dijitDateTextBox .dijitDownArrowButton {
   height: 20px;
   background-image: none !important;
 }
 
-[id*=DP] .dijitDownArrowButton input {
+[id*=DP] .dijitDownArrowButton input,
+div.dijitDateTextBox .dijitDownArrowButton input {
   padding: 0px;
 }
 
-#widget_DP_range1_lookup, #widget_DP_range2_lookup {
+#widget_DP_range1_lookup, #widget_DP_range2_lookup,
+div.dijitDateTextBox {
   height: 20px;
   width: 120px;
 }
@@ -5261,12 +5288,13 @@ div.listbox .pentaho-listbox {
   width: 100%;
 }
 
-.dialog-content #date-picker-dlg-wrapper .dijitComboBox .dijitArrowButton {
+.dialog-content #date-picker-dlg-wrapper .dijitComboBox .dijitArrowButton,
+div.dijitDateTextBox.dijitComboBox .dijitArrowButton {
   border: none;
   box-shadow: none;
 }
 
-#date-picker-dlg-wrapper .dijitComboBox {
+#date-picker-dlg-wrapper .dijitComboBox, div.dijitDateTextBox.dijitComboBox {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
@@ -5275,11 +5303,13 @@ div.listbox .pentaho-listbox {
   text-align: center;
 }
 
-#DP_range1 #widget_DP_range1_lookup {
+#DP_range1 #widget_DP_range1_lookup,
+div.dijitDateTextBox.dijitTextBox {
   margin: auto;
 }
 
-#DP_range1_lookup, #DP_range2_lookup {
+#DP_range1_lookup, #DP_range2_lookup,
+div.dijitDateTextBox input.dijitInputInner[type='text']{
   padding-right: 0px;
   padding-top: 0px;
   padding-left: 5px !important;
@@ -5288,8 +5318,12 @@ div.listbox .pentaho-listbox {
 }
 
 #widget_DP_range1_lookup_dropdown, #widget_DP_range2_lookup_dropdown {
-  margin-left: -34px !important;
   margin-top: 10px !important;
+  margin-left: -34px !important;
+}
+
+div.dijitPopup.dijitCalendarPopup{
+  margin-top: 3px !important;
 }
 
 #date-picker-dlg-wrapper .example-calendar {
@@ -5301,11 +5335,13 @@ div.listbox .pentaho-listbox {
   margin-top: 10px;
 }
 
-#widget_DP_range1_lookup .dijitArrowButtonInner, #widget_DP_range2_lookup .dijitArrowButtonInner {
+#widget_DP_range1_lookup .dijitArrowButtonInner, #widget_DP_range2_lookup .dijitArrowButtonInner,
+div.dijitDateTextBox .dijitArrowButtonInner {
   background-image: url("images/calendar_icon.png") !important;
 }
 
-#widget_DP_range1_lookup {
+#widget_DP_range1_lookup,
+div.dijitDateTextBox.dijitTextBox {
   border-color: #cbdde8;
   background-image: none;
 }
@@ -5512,10 +5548,6 @@ treecontrol.tree-classic li .tree-selected {
   max-width:62px;
 }
 
-#shareButton, #favoritesButton, #runButton, #cutbutton, #copyButton, #renameButton, #downloadButton, #newFolderButton, #deleteFolderButton,#uploadButton, #deleteButton {
-	display:none !important;
-}
-
 .trash, .separator {
     display: none;
 }
@@ -5544,4 +5576,11 @@ div#animate-wrapper:after {
 }
 
 
+.username-password {
+    display: inline-flex;
+}
 
+
+.login-button {
+    margin-top: 24px;
+}
