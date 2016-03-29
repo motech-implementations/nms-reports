@@ -166,7 +166,7 @@
 %>
     <div id="login-form-container" class="lang_<%=cleanedLang%>">
       <div id="animate-wrapper">
-        <h1 style="text-transform: uppercase;">User Login</h1>
+        <h3 style="text-transform: uppercase;">User Login</h3>
          <form name="login" id="login" action="j_spring_security_check" method="POST">
 	 <div class="username-password">
            <div class="row-fluid nowrap">
@@ -207,7 +207,7 @@
         </form>
       </div>
 
-      <div class="row-fluid">
+      <div class="row-fluid" style="display: none ! important;">
         <div id="evaluationPanel" class="span10 row-fluid">
           <div id="role-admin-panel" class="span6 well">
             <div class="login-role"><%=Messages.getInstance().getString("UI.PUC.LOGIN.ADMIN_USER")%></div>
