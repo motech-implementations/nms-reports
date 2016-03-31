@@ -3643,7 +3643,7 @@ div.prompt-panel .pentaho-toggle-button-container {
 /* Login page styles */
 #login-background {
   background: url(images/NHM_Logo.png) no-repeat top center;
-  height: 663px;
+  height: 620px;
   width: 1255px;
   top: 10px;
   margin: 0 auto;
@@ -3775,7 +3775,7 @@ div.prompt-panel .pentaho-toggle-button-container {
   margin-left: -35%;
 }
 #login-wrapper {
-  height: 670px;
+  height: 620px;
 }
 .login-role {
   font-size: 16px;
