@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ContextType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" confirmationNeeded="false" name="Default">
+  <contextParameter comment="" name="motech_server" prompt="motech_server?" promptNeeded="false" type="id_String" value="null"/>
+  <contextParameter comment="" name="motech_password" prompt="motech_password?" promptNeeded="false" type="id_Password" value="RRyLGfljUdg="/>
+  <contextParameter comment="" name="motech_additionalParams" prompt="motech_additionalParams?" promptNeeded="false" type="id_String" value="null"/>
+  <contextParameter comment="" name="motech_login" prompt="motech_login?" promptNeeded="false" type="id_String" value="null"/>
+  <contextParameter comment="" name="motech_database" prompt="motech_database?" promptNeeded="false" type="id_String" value="null"/>
+  <contextParameter comment="" name="motech_port" prompt="motech_port?" promptNeeded="false" type="id_String" value="null"/>
+</talendfile:ContextType>
