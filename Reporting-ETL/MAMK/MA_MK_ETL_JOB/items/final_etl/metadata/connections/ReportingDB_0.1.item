@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:TalendMetadata="http://www.talend.org/metadata/connection/2010" xmlns:orgomg.cwm.resource.relational="http:///orgomg/cwm/resource/relational.ecore">
+  <TalendMetadata:DatabaseConnection xmi:id="_kbqU4B2tEeWZI_ICf0Aw5Q" name="ReportingDB" id="_ZwaTIB2tEeWZI_ICf0Aw5Q" label="ReportingDB" dataPackage="_xTmH4HfGEeWVKud6zQA6cg" ContextMode="true" ContextId="_cmnigHfGEeWVKud6zQA6cg" contextName="Default" DatabaseType="MySQL" DriverJarPath="" DriverClass="org.gjt.mm.mysql.Driver" URL="jdbc:mysql://localhost:3306/ananya_kilkari?noDatetimeStringSync=true" dbVersionString="MYSQL_4" Port="context.report_port" Username="context.report_login" Password="context.report_password" ServerName="context.report_server" DatasourceName="" FileFieldName="" SID="context.report_database" SqlSynthax="SQL Syntax" DbmsId="mysql_id" ProductId="MYSQL" DBRootPath="" AdditionalParams="context.report_AdditionalParams" StandardSQL="true" SQLMode="false" UiSchema="">
+    <taggedValue xmi:id="_kbqU4R2tEeWZI_ICf0Aw5Q" tag="Is Conn Need Reload" value="true"/>
+    <taggedValue xmi:id="_kb9P0B2tEeWZI_ICf0Aw5Q" tag="package filter" value=""/>
+    <taggedValue xmi:id="_kcIO8B2tEeWZI_ICf0Aw5Q" tag="Status" value=""/>
+    <taggedValue xmi:id="_kcIO8R2tEeWZI_ICf0Aw5Q" tag="Version" value="0.1"/>
+    <taggedValue xmi:id="_kcIO8h2tEeWZI_ICf0Aw5Q" tag="Purpose" value=""/>
+    <taggedValue xmi:id="_kcIO8x2tEeWZI_ICf0Aw5Q" tag="Description" value=""/>
+    <taggedValue xmi:id="_kcIO9B2tEeWZI_ICf0Aw5Q" tag="Author" value=""/>
+    <taggedValue xmi:id="_kcIO9R2tEeWZI_ICf0Aw5Q" tag="otherParameter"/>
+    <taggedValue xmi:id="_kcT1IB2tEeWZI_ICf0Aw5Q" tag="DB ProductName" value="MySQL"/>
+    <taggedValue xmi:id="_kcT1IR2tEeWZI_ICf0Aw5Q" tag="DB ProductVersion" value="5.5.40-0ubuntu0.14.04.1"/>
+    <taggedValue xmi:id="_kcT1Ih2tEeWZI_ICf0Aw5Q" tag="DB IdentifierQuoteString" value="`"/>
+    <parameters xmi:id="_kbqU4h2tEeWZI_ICf0Aw5Q" key="CONN_PARA_KEY_USERNAME" value="context.ReportingDB_Login"/>
+  </TalendMetadata:DatabaseConnection>
+  <orgomg.cwm.resource.relational:Catalog xmi:id="_xTmH4HfGEeWVKud6zQA6cg" name="ananya_kilkari" dataManager="_kbqU4B2tEeWZI_ICf0Aw5Q"/>
+</xmi:XMI>
