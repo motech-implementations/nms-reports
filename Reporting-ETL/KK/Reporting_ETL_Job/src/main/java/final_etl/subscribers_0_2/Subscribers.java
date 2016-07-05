@@ -14,16 +14,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package final_etl.subscribers_0_1;
+package final_etl.subscribers_0_2;
 
-import routines.Numeric;
+import routines.Mathematical;
 import routines.DataOperation;
-import routines.TalendDataGenerator;
-import routines.TalendString;
-import routines.StringHandling;
 import routines.Relational;
 import routines.TalendDate;
-import routines.Mathematical;
+import routines.TalendDataGenerator;
+import routines.Numeric;
+import routines.TalendString;
+import routines.StringHandling;
 import routines.system.*;
 import routines.system.api.*;
 import java.text.ParseException;
@@ -244,7 +244,7 @@ public class Subscribers implements TalendJob {
 		return this.context;
 	}
 
-	private final String jobVersion = "0.1";
+	private final String jobVersion = "0.2";
 	private final String jobName = "Subscribers";
 	private final String projectName = "FINAL_ETL";
 	public Integer errorCode = null;
@@ -2569,7 +2569,7 @@ public class Subscribers implements TalendJob {
 				java.sql.Statement stmt_tMysqlInput_3 = conn_tMysqlInput_3
 						.createStatement();
 
-				String dbquery_tMysqlInput_3 = "select nms_subscribers.id, \n       (CASE WHEN nms_mcts_mothers.name IS NULL THEN nms_mcts_children.name ELSE nms_mcts_mothers.name END) as name,\n	   nms_languages.name as lang,\n       TIMESTAMPDIFF(YEAR, DATE(nms_mcts_mothers.dateOfBirth), CURDATE())AS age,\n       nms_subscribers.dateOfBirth,\n       (CASE WHEN nms_mcts_mothers.state_id_OID IS NULL THEN nms_mcts_children.state_id_OID ELSE nms_mcts_mothers.state_id_OID END) as state,\n       (CASE WHEN nms_mcts_mothers.district_id_OID IS NULL THEN nms_mcts_children.district_id_OID ELSE nms_mcts_mothers.district_id_OID END) as district,\n       (CASE WHEN nms_mcts_mothers.taluka_id_OID IS NULL THEN nms_mcts_children.taluka_id_OID ELSE nms_mcts_mothers.taluka_id_OID END) as taluka,\n       (CASE WHEN nms_mcts_mothers.village_id_OID IS NULL THEN nms_mcts_children.village_id_OID ELSE nms_mcts_mothers.village_id_OID END) as village,\n       (CASE WHEN nms_mcts_mothers.healthBlock_id_OID IS NULL THEN nms_mcts_children.healthBlock_id_OID ELSE nms_mcts_mothers.healthBlock_id_OID END) as hb,\n       (CASE WHEN nms_mcts_mothers.healthFacility_id_OID IS NULL THEN nms_mcts_children.healthFacility_id_OID ELSE nms_mcts_mothers.healthFacility_id_OID END) as hf,\n       (CASE WHEN nms_mcts_mothers.healthSubFacility_id_OID IS NULL THEN nms_mcts_children.healthSubFacility_id_OID ELSE nms_mcts_mothers.healthSubFacility_id_OID END) as hsf,\n      now() as lastModifiedTime,\n      nms_subscribers.lastMenstrualPeriod,GREATEST(nms_subscribers.modificationDate,COALESCE(nms_mcts_mothers.modificationDate,0),\n	  COALESCE(nms_mcts_children.modificationDate,0),COALESCE(nms_languages.modificationDate,0)) as 'modificationDate'\nFROM nms_subscribers\nLEFT OUTER JOIN nms_mcts_mothers ON nms_subscribers.mother_id_OID = nms_mcts_mothers.id\nLEFT OUTER JOIN nms_mcts_children ON nms_subscribers.child_id_OID = nms_mcts_children.id\nLEFT OUTER JOIN nms_languages ON nms_subscribers.language_id_OID = nms_languages.id\nWHERE nms_subscribers.creationDate<='"
+				String dbquery_tMysqlInput_3 = "select nms_subscribers.id, \n       (CASE WHEN nms_mcts_mothers.name IS NULL THEN nms_mcts_children.name ELSE nms_mcts_mothers.name END) as name,\n	   nms_languages.name as lang,\n       TIMESTAMPDIFF(YEAR, DATE(nms_mcts_mothers.dateOfBirth), CURDATE())AS age,\n       nms_subscribers.dateOfBirth,\n       (CASE WHEN nms_mcts_mothers.state_id_OID IS NULL THEN nms_mcts_children.state_id_OID ELSE nms_mcts_mothers.state_id_OID END) as state,\n       (CASE WHEN nms_mcts_mothers.district_id_OID IS NULL THEN nms_mcts_children.district_id_OID ELSE nms_mcts_mothers.district_id_OID END) as district,\n       (CASE WHEN nms_mcts_mothers.taluka_id_OID IS NULL THEN nms_mcts_children.taluka_id_OID ELSE nms_mcts_mothers.taluka_id_OID END) as taluka,\n       (CASE WHEN nms_mcts_mothers.village_id_OID IS NULL THEN nms_mcts_children.village_id_OID ELSE nms_mcts_mothers.village_id_OID END) as village,\n       (CASE WHEN nms_mcts_mothers.healthBlock_id_OID IS NULL THEN nms_mcts_children.healthBlock_id_OID ELSE nms_mcts_mothers.healthBlock_id_OID END) as hb,\n       (CASE WHEN nms_mcts_mothers.primaryHealthCenter_id_OID IS NULL THEN nms_mcts_children.primaryHealthCenter_id_OID ELSE nms_mcts_mothers.primaryHealthCenter_id_OID END) as hf,\n       (CASE WHEN nms_mcts_mothers.healthSubFacility_id_OID IS NULL THEN nms_mcts_children.healthSubFacility_id_OID ELSE nms_mcts_mothers.healthSubFacility_id_OID END) as hsf,\n      now() as lastModifiedTime,\n      nms_subscribers.lastMenstrualPeriod,GREATEST(nms_subscribers.modificationDate,COALESCE(nms_mcts_mothers.modificationDate,0),\n	  COALESCE(nms_mcts_children.modificationDate,0),COALESCE(nms_languages.modificationDate,0)) as 'modificationDate'\nFROM nms_subscribers\nLEFT OUTER JOIN nms_mcts_mothers ON nms_subscribers.mother_id_OID = nms_mcts_mothers.id\nLEFT OUTER JOIN nms_mcts_children ON nms_subscribers.child_id_OID = nms_mcts_children.id\nLEFT OUTER JOIN nms_languages ON nms_subscribers.language_id_OID = nms_languages.id\nWHERE nms_subscribers.creationDate<='"
 						+ (String) globalMap.get("lastEtlTime")
 						+ "'\nAND ((nms_subscribers.modificationDate >'"
 						+ (String) globalMap.get("lastEtlTime")
@@ -4298,7 +4298,7 @@ public class Subscribers implements TalendJob {
 				java.sql.Statement stmt_tMysqlInput_1 = conn_tMysqlInput_1
 						.createStatement();
 
-				String dbquery_tMysqlInput_1 = "select nms_subscribers.id, \n       (CASE WHEN nms_mcts_mothers.name IS NULL THEN nms_mcts_children.name ELSE nms_mcts_mothers.name END) as name,\n	   nms_languages.name as lang,\n       TIMESTAMPDIFF(YEAR, DATE(nms_mcts_mothers.dateOfBirth), CURDATE())AS age,\n       nms_subscribers.dateOfBirth,\n       (CASE WHEN nms_mcts_mothers.state_id_OID IS NULL THEN nms_mcts_children.state_id_OID ELSE nms_mcts_mothers.state_id_OID END) as state,\n       (CASE WHEN nms_mcts_mothers.district_id_OID IS NULL THEN nms_mcts_children.district_id_OID ELSE nms_mcts_mothers.district_id_OID END) as district,\n       (CASE WHEN nms_mcts_mothers.taluka_id_OID IS NULL THEN nms_mcts_children.taluka_id_OID ELSE nms_mcts_mothers.taluka_id_OID END) as taluka,\n       (CASE WHEN nms_mcts_mothers.village_id_OID IS NULL THEN nms_mcts_children.village_id_OID ELSE nms_mcts_mothers.village_id_OID END) as village,\n       (CASE WHEN nms_mcts_mothers.healthBlock_id_OID IS NULL THEN nms_mcts_children.healthBlock_id_OID ELSE nms_mcts_mothers.healthBlock_id_OID END) as hb,\n       (CASE WHEN nms_mcts_mothers.healthFacility_id_OID IS NULL THEN nms_mcts_children.healthFacility_id_OID ELSE nms_mcts_mothers.healthFacility_id_OID END) as hf,\n       (CASE WHEN nms_mcts_mothers.healthSubFacility_id_OID IS NULL THEN nms_mcts_children.healthSubFacility_id_OID ELSE nms_mcts_mothers.healthSubFacility_id_OID END) as hsf,\nnow() as lastModifiedTime,      \nnms_subscribers.lastMenstrualPeriod,GREATEST(nms_subscribers.modificationDate,COALESCE(nms_mcts_mothers.modificationDate,0),\n	  COALESCE(nms_mcts_children.modificationDate,0),COALESCE(nms_languages.modificationDate,0)) as 'modificationDate'\nFROM nms_subscribers\nLEFT OUTER JOIN nms_mcts_mothers ON nms_subscribers.mother_id_OID = nms_mcts_mothers.id\nLEFT OUTER JOIN nms_mcts_children ON nms_subscribers.child_id_OID = nms_mcts_children.id\nLEFT OUTER JOIN nms_languages ON nms_subscribers.language_id_OID = nms_languages.id\nWHERE nms_subscribers.creationDate>'"
+				String dbquery_tMysqlInput_1 = "select nms_subscribers.id, \n       (CASE WHEN nms_mcts_mothers.name IS NULL THEN nms_mcts_children.name ELSE nms_mcts_mothers.name END) as name,\n	   nms_languages.name as lang,\n       TIMESTAMPDIFF(YEAR, DATE(nms_mcts_mothers.dateOfBirth), CURDATE())AS age,\n       nms_subscribers.dateOfBirth,\n       (CASE WHEN nms_mcts_mothers.state_id_OID IS NULL THEN nms_mcts_children.state_id_OID ELSE nms_mcts_mothers.state_id_OID END) as state,\n       (CASE WHEN nms_mcts_mothers.district_id_OID IS NULL THEN nms_mcts_children.district_id_OID ELSE nms_mcts_mothers.district_id_OID END) as district,\n       (CASE WHEN nms_mcts_mothers.taluka_id_OID IS NULL THEN nms_mcts_children.taluka_id_OID ELSE nms_mcts_mothers.taluka_id_OID END) as taluka,\n       (CASE WHEN nms_mcts_mothers.village_id_OID IS NULL THEN nms_mcts_children.village_id_OID ELSE nms_mcts_mothers.village_id_OID END) as village,\n       (CASE WHEN nms_mcts_mothers.healthBlock_id_OID IS NULL THEN nms_mcts_children.healthBlock_id_OID ELSE nms_mcts_mothers.healthBlock_id_OID END) as hb,\n       (CASE WHEN nms_mcts_mothers.primaryHealthCenter_id_OID IS NULL THEN nms_mcts_children.primaryHealthCenter_id_OID ELSE nms_mcts_mothers.primaryHealthCenter_id_OID END) as hf,\n       (CASE WHEN nms_mcts_mothers.healthSubFacility_id_OID IS NULL THEN nms_mcts_children.healthSubFacility_id_OID ELSE nms_mcts_mothers.healthSubFacility_id_OID END) as hsf,\nnow() as lastModifiedTime,      \nnms_subscribers.lastMenstrualPeriod,GREATEST(nms_subscribers.modificationDate,COALESCE(nms_mcts_mothers.modificationDate,0),\n	  COALESCE(nms_mcts_children.modificationDate,0),COALESCE(nms_languages.modificationDate,0)) as 'modificationDate'\nFROM nms_subscribers\nLEFT OUTER JOIN nms_mcts_mothers ON nms_subscribers.mother_id_OID = nms_mcts_mothers.id\nLEFT OUTER JOIN nms_mcts_children ON nms_subscribers.child_id_OID = nms_mcts_children.id\nLEFT OUTER JOIN nms_languages ON nms_subscribers.language_id_OID = nms_languages.id\nWHERE nms_subscribers.creationDate>'"
 						+ (String) globalMap.get("lastEtlTime") + "'";
 
 				globalMap.put("tMysqlInput_1_QUERY", dbquery_tMysqlInput_1);
@@ -5173,7 +5173,7 @@ public class Subscribers implements TalendJob {
 			// the default context instead.
 			java.io.InputStream inContext = Subscribers.class.getClassLoader()
 					.getResourceAsStream(
-							"final_etl/subscribers_0_1/contexts/" + contextStr
+							"final_etl/subscribers_0_2/contexts/" + contextStr
 									+ ".properties");
 			if (isDefaultContext && inContext == null) {
 
@@ -5494,6 +5494,6 @@ public class Subscribers implements TalendJob {
 	ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- * 155858 characters generated by Talend Open Studio for Big Data on the May 20,
- * 2016 2:50:04 PM PDT
+ * 155888 characters generated by Talend Open Studio for Big Data on the 1 July,
+ * 2016 12:54:46 PM IST
  ************************************************************************************************/
