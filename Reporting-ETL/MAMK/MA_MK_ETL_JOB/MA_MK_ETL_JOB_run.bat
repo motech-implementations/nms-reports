@@ -1,0 +1,3 @@
+%~d0
+cd %~dp0
+java -Xms256M -Xmx1024M -cp .;../lib/routines.jar;../lib/log4j-1.2.16.jar;../lib/talendcsv.jar;../lib/mysql-connector-java-3.1.14-bin.jar;../lib/talend_file_enhanced_20070724.jar;../lib/mysql-connector-java-5.1.30-bin.jar;../lib/dom4j-1.6.1.jar;ma_mk_etl_job_0_2.jar;ma_mk_data_0_2.jar;ma_dimension_0_1.jar;ma_call_detail_0_1.jar;mk_call_detail_0_1.jar;frontlineworker_0_1.jar;log_etl_table_info_0_1.jar;ma_course_completion_0_1.jar;circle_dimension_0_1.jar; final_etl.ma_mk_etl_job_0_2.MA_MK_ETL_JOB --context=Default %* 
