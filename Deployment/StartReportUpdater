@@ -12,19 +12,20 @@ export xbcolor=white
 export delay=4
 execno=8
 
-KILKARI_AGGREGATE_SRC_PATH="Kilkari Reports/Aggregated Reports/"
-KILKARI_INDIVIDUAL_SRC_PATH="Kilkari Reports/Individual Reports/"
-MA_SRC_PATH="Mobile Academy Reports/Individual Reports/"
-MK_SRC_PATH="Mobile Academy Reports/MK Reports/"
-MAMKCOMMON_SRC_PATH="Mobile Academy Reports/Aggregated Reports/"
+KILKARI_AGGREGATE_SRC_PATH="Kilkari reports/Aggregated Reports/"
+KILKARI_INDIVIDUAL_SRC_PATH="Kilkari reports/Individual Reports/"
+MA_SRC_PATH="Mobile Academy reports/Individual Reports/"
+MK_SRC_PATH="Mobile Academy reports/MK Reports/"
+MAMKCOMMON_SRC_PATH="Mobile Academy reports/Aggregated Reports/"
 
-KILKARI_AGGREGATE_DEST_PATH="/home/Kilkari Reports/Aggregated Reports/"
-KILKARI_INDIVIDUAL_DEST_PATH="/home/Kilkari Reports/Individual Reports/"
-MA_DEST_PATH="/home/Mobile Academy Reports/Individual Reports/"
-MK_DEST_PATH="/home/Mobile Academy Reports/MK Reports/"
-MAMKCOMMON_DEST_PATH="/home/Mobile Academy Reports/Aggregated Reports/"
+KILKARI_AGGREGATE_DEST_PATH="/home/Kilkari reports/Aggregated Reports/"
+KILKARI_INDIVIDUAL_DEST_PATH="/home/Kilkari reports/Individual Reports/"
+MA_DEST_PATH="/home/Mobile Academy reports/Individual Reports/"
+MK_DEST_PATH="/home/Mobile Academy reports/MK Reports/"
+MAMKCOMMON_DEST_PATH="/home/Mobile Academy reports/Aggregated Reports/"
 ZIP_DEST_PATH="/home/"
 PEHTAHO_UPDATE_ROOT_PATH=$(echo $CATALINA_HOME)
+#PEHTAHO_UPDATE_ROOT_PATH=/home/vishnu/Downloads/biserver-ce/tomcat
 
 #PEHTAHO_UPDATE_ROOT_PATH=/home/grameen/biserver-ce
 #PEHTAHO_UPDATE_ROOT_PATH_PROD=/usr/local/biserver-ce
@@ -57,11 +58,11 @@ function initial_set ()
    path[$order]="MA Aggregate"; 
 
      order=6
-   exec_NM[$order]="Upload Kilkari Reports via zip file";
+   exec_NM[$order]="Upload Kilkari reports via zip file";
    path[$order]="Upload Kilkari via zip file";
   
    order=7
-   exec_NM[$order]="Upload Mobile Academy via zip file";
+   exec_NM[$order]="Upload Mobile Academy reports via zip file";
    path[$order]="Upload Mobile Academy via zip file";
 
 
@@ -89,13 +90,13 @@ function importReportsZip ()
 
 if [ $1 -eq 100 ]
 	then
-	 echo "Exporting Started for" $zipPath"/Kilkari Reports.zip"
-	 sh import-export.sh --import --url=$BI_SERVER --username=$USER --password=$PASSWORD --charset=UTF-8 --path="$ZIP_DEST_PATH" --file-path="$zipPath/Kilkari Reports.zip" --overwrite=true --permission=true --retainOwnership=true
+	 echo "Exporting Started for" $zipPath"/Kilkari reports.zip"
+	 sh import-export.sh --import --url=$BI_SERVER --username=$USER --password=$PASSWORD --charset=UTF-8 --path="$ZIP_DEST_PATH" --file-path="$zipPath/Kilkari reports.zip" --overwrite=true --permission=true --retainOwnership=true
 
 elif [ $1 -eq 200 ]
         then
-	 echo "Exporting Started for" $zipPath"/Mobile Academy Reports.zip"
-	 sh import-export.sh --import --url=$BI_SERVER --username=$USER --password=$PASSWORD --charset=UTF-8 --path="$ZIP_DEST_PATH" --file-path="$zipPath/Mobile Academy Reports.zip" --overwrite=true --permission=true --retainOwnership=true >/dev/null 2>&1
+	 echo "Exporting Started for" $zipPath"/Mobile Academy reports.zip"
+	 sh import-export.sh --import --url=$BI_SERVER --username=$USER --password=$PASSWORD --charset=UTF-8 --path="$ZIP_DEST_PATH" --file-path="$zipPath/Mobile Academy reports.zip" --overwrite=true --permission=true --retainOwnership=true
 
 else
 	 echo "Wrong Option"
@@ -109,7 +110,7 @@ function importReports ()
 
     BI_SERVER=http://localhost:8080/pentaho
         
-    echo -n "Directory Path where Kilkari Reports/Mobile Academy folder has been kept(Please do not include Kilkari Reports/Mobile Academy name in the path): "
+    echo -n "Directory Path where Kilkari reports/Mobile Academy reports folder has been kept(Please do not include Kilkari reports/Mobile Academy reports name in the path): "
     read filepath
     echo
     echo -n "1 for Single prpt file import , 2 for ALL files in selected option : "
